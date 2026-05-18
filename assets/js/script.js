@@ -120,13 +120,16 @@
     });
   });
 
-  /* ---------- FAQ: only one open at a time ---------- */
-  const faqItems = document.querySelectorAll(".faq-item");
+  /* ---------- FAQ: single-open via native toggle event ----------
+     Let <details>/<summary> handle open/close natively; only enforce that
+     opening one closes the others. preventDefault on summary click is
+     unreliable across browsers, so we don't fight the native behaviour. */
+  const faqItems = Array.from(document.querySelectorAll(".faq-item"));
   faqItems.forEach((item) => {
     item.addEventListener("toggle", () => {
       if (item.open) {
         faqItems.forEach((other) => {
-          if (other !== item) other.open = false;
+          if (other !== item) other.removeAttribute("open");
         });
       }
     });
