@@ -347,10 +347,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: calc(var(--header-h) + 60px) var(--gutter) 80px;
+  padding: calc(var(--header-h) + 56px) var(--gutter) 128px;
   overflow: hidden;
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--paper);
+  color: var(--text);
   display: grid;
   align-items: end;
 }
@@ -365,26 +365,33 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   top: clamp(60px, 11vh, 140px);
   width: 100%; height: 110%;
   object-fit: cover;
-  object-position: center center;
-  opacity: .72;
+  object-position: 56% center;
+  opacity: 1;
   transform: translate3d(0, var(--parallax-y), 0) scale(1.04);
   will-change: transform;
-  filter: saturate(.92) contrast(1.04);
+  filter: saturate(1.1) contrast(1.05) brightness(1.05);
 }
-.hero-bg-mask {
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, rgba(24,26,23,.45) 0%, rgba(24,26,23,.25) 30%, rgba(24,26,23,.4) 65%, rgba(24,26,23,.88) 100%),
-    linear-gradient(90deg, rgba(24,26,23,.78) 0%, rgba(24,26,23,.32) 45%, rgba(24,26,23,.2) 70%, rgba(24,26,23,.55) 100%);
-}
+.hero-bg-mask { display: none; }
 
 .hero-inner {
   position: relative;
   max-width: 880px;
 }
 
+.hero .eyebrow-light { color: var(--text-soft); }
+.hero .eyebrow-light i { background: rgba(58,58,53,.55); }
+.hero .eyebrow-light::after {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brass-deep);
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
 .hero-title {
-  color: var(--cream);
+  color: var(--ink);
   font-size: clamp(2.6rem, 6.6vw, 5.6rem);
   font-weight: 500;
   line-height: 1.08;
@@ -394,35 +401,53 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .hero-title em {
   font-style: normal;
   font-family: var(--serif-en);
-  color: var(--brass);
+  color: var(--brass-deep);
   font-weight: 500;
   margin-right: .04em;
 }
 
 .hero-lead {
-  margin: 36px 0 44px;
+  margin: 28px 0 36px;
   max-width: 36ch;
   font-size: clamp(.95rem, 1.4vw, 1.05rem);
   line-height: 2.1;
-  color: rgba(251, 247, 238, .82);
+  color: rgba(58, 58, 53, .9);
 }
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-.hero-actions .btn-line { border-color: rgba(251,247,238,.55); color: var(--cream); }
-.hero-actions .btn-line:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.hero-actions .btn-line {
+  border-color: rgba(24,26,23,.55);
+  color: var(--ink);
+}
+.hero-actions .btn-line:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
 .hero-meta {
   position: absolute;
   right: var(--gutter);
-  top: calc(var(--header-h) + 60px);
-  width: clamp(280px, 26vw, 360px);
-  border-top: 1px solid rgba(251,247,238,.25);
-  padding-top: 22px;
+  bottom: 144px;
+  top: auto;
+  width: clamp(320px, 28vw, 400px);
+  padding: 26px 28px 24px;
+  background: linear-gradient(180deg, rgba(24,26,23,.50), rgba(24,26,23,.74));
+  backdrop-filter: blur(14px) saturate(1.08);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  border: 1px solid rgba(251,247,238,.18);
+  border-top: 1px solid rgba(178,147,99,.68);
+  border-radius: 2px;
+  box-shadow: 0 24px 48px -30px rgba(0,0,0,.45);
 }
 .hero-meta-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 18px 22px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 22px 26px;
 }
-.hero-meta-grid > div { display: flex; flex-direction: column; gap: 6px; }
+.hero-meta-grid > div {
+  display: flex; flex-direction: column; gap: 6px;
+  position: relative; padding-left: 12px;
+}
+.hero-meta-grid > div::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 2px; height: 16px;
+  background: var(--brass);
+}
 .hero-meta-grid .num {
   font-family: var(--serif-en);
   font-size: clamp(1.6rem, 2.4vw, 2.1rem);
@@ -446,26 +471,26 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 .scroll-cue {
   position: absolute;
-  left: var(--gutter); bottom: 28px;
-  display: flex; align-items: center; gap: 14px;
-  font-size: .65rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase;
-  color: rgba(251,247,238,.7);
+  left: var(--gutter); bottom: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: .6rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase;
+  color: var(--text-soft);
 }
 .scroll-cue i {
-  display: block; width: 64px; height: 1px;
-  background: rgba(251,247,238,.5);
+  display: block; width: 1px; height: 44px;
+  background: rgba(58,58,53,.45);
   position: relative; overflow: hidden;
 }
 .scroll-cue i::after {
   content: ""; position: absolute; inset: 0;
-  background: var(--cream);
-  transform: translateX(-100%);
-  animation: cueLine 2.4s var(--ease-out) infinite;
+  background: var(--ink);
+  transform: translateY(-100%);
+  animation: cueDown 2.4s var(--ease-out) infinite;
 }
-@keyframes cueLine {
-  0% { transform: translateX(-100%); }
-  60% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
+@keyframes cueDown {
+  0% { transform: translateY(-100%); }
+  60% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
 }
 
 /* =========================================================
@@ -1558,6 +1583,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .marquee-track, .scroll-cue i::after { animation: none; }
   .mobile-menu { transition: none; }
+  .hero-bg img { transform: none !important; }
   * { scroll-behavior: auto !important; }
 }
 
@@ -1579,10 +1605,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .hero-inner { padding-top: 30px; }
   .hero-meta {
     position: static;
+    bottom: auto;
     width: 100%;
     margin-top: 56px;
-    border-top: 1px solid rgba(251,247,238,.25);
+    padding: 22px 0 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    border-top: 1px solid rgba(58,58,53,.22);
+    border-radius: 0;
+    box-shadow: none;
   }
+  .hero-meta-grid > div { padding-left: 0; }
+  .hero-meta-grid > div::before { display: none; }
+  .hero-meta-grid .num { color: var(--ink); }
+  .hero-meta-grid .num i { color: var(--brass-deep); }
+  .hero-meta-grid small { color: rgba(58,58,53,.62); }
   .scroll-cue { display: none; }
 
   .concept-block,
